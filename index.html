@@ -67,21 +67,38 @@ h1{font-size:clamp(3.6rem,14vw,10rem);line-height:.92;letter-spacing:.01em;margi
 .foot b{display:block;font-weight:600}
 .go{flex:none;display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--ac);border-radius:50%;color:var(--ac);transition:background .3s,color .3s,transform .4s cubic-bezier(.22,1,.36,1)}
 .tile:hover .go{background:var(--ac);color:var(--night);transform:translateX(4px)}
-/* enquiry */
-.enq{padding-bottom:clamp(56px,9vw,110px)}
-.enq h2{font-size:clamp(1.8rem,4.5vw,2.8rem);margin-bottom:6px}
-.enq form{display:grid;gap:16px;margin-top:28px;max-width:640px}
+/* chooser + sponsor form */
+.pick{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:20px;background:rgba(11,11,12,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow-y:auto;animation:fade .3s ease both}
+.pick[hidden]{display:none}
+@keyframes fade{from{opacity:0}}
+.panel{position:relative;width:100%;max-width:760px;margin:auto;padding:clamp(24px,4vw,40px);border:1px solid var(--char);border-radius:12px;background:#111113;animation:rise .5s cubic-bezier(.22,1,.36,1) both}
+.panel h2{font-size:clamp(1.8rem,4.5vw,2.6rem);line-height:1;margin:10px 0 6px;padding-right:48px}
+.eyebrow{font-size:.8rem;font-weight:500;color:var(--ac,var(--pump))}
+.x{position:absolute;top:16px;right:16px;display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--char);border-radius:50%;background:none;color:var(--ivory);cursor:pointer;transition:border-color .3s,color .3s}
+.x:hover{border-color:var(--ac,var(--pump));color:var(--ac,var(--pump))}
+.choices{display:grid;gap:14px;margin-top:26px}
+@media(min-width:600px){.choices{grid-template-columns:1fr 1fr}}
+.choice{display:flex;flex-direction:column;justify-content:space-between;gap:36px;min-height:210px;padding:22px;border:1px solid var(--char);border-radius:10px;background:rgba(244,240,232,.03);color:var(--ivory);text-align:left;font:inherit;cursor:pointer;transition:border-color .3s,background .3s,transform .4s cubic-bezier(.22,1,.36,1)}
+.choice:hover{border-color:var(--ac,var(--pump));background:rgba(244,240,232,.06);transform:translateY(-4px)}
+.choice .d{font-size:2.2rem;line-height:1}
+.choice small{display:block;margin-top:8px;font-size:.9rem;color:rgba(244,240,232,.7)}
+.choice .arr{align-self:flex-end;color:var(--ac,var(--pump))}
+.choice.soon{opacity:.55;cursor:default;pointer-events:none}
+.back{margin-bottom:14px;padding:0;border:0;background:none;color:var(--ash);font:500 .85rem Inter,sans-serif;cursor:pointer}
+.back:hover{color:var(--ivory)}
+.panel form{display:grid;gap:16px;margin-top:22px}
 .row{display:grid;gap:16px}
 @media(min-width:560px){.row{grid-template-columns:1fr 1fr}}
 .fld{display:grid;gap:6px;font-size:.85rem;font-weight:500;color:var(--ash)}
 .fld input,.fld select,.fld textarea{width:100%;font:400 1rem/1.4 Inter,system-ui,sans-serif;color:var(--ivory);background:rgba(244,240,232,.04);border:1px solid var(--char);border-radius:8px;padding:14px 16px;transition:border-color .3s,background .3s}
-.fld textarea{min-height:120px;resize:vertical}
+.fld textarea{min-height:110px;resize:vertical}
 .fld select option{background:var(--night);color:var(--ivory)}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--pump);background:rgba(255,106,42,.06)}
 .send{justify-self:start;border:0;cursor:pointer;font-family:inherit}
 .send[disabled]{opacity:.5;cursor:default}
 .msg{min-height:1.4em;font-size:.9rem}
 .msg.ok{color:#5EE0A0}.msg.err{color:#FF7A7A}
+body.lock{overflow:hidden}
 /* past */
 .past{padding-bottom:clamp(64px,10vw,120px)}
 .past h2{font-size:clamp(1.8rem,4.5vw,2.8rem);margin-bottom:24px}
@@ -117,11 +134,11 @@ footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-a
   <p class="lede rise" style="--n:-3">Events by Unrest for Delhi University students. Choose one and jump in.</p>
  </section>
 
- <!-- Event page links: change the href on each tile if a page moves.
-      href="#" tiles (Versus, Diwali Party) are inert until you set a real link. -->
+ <!-- Each tile opens a Student / Sponsor chooser. The tile href is the student page.
+      href="#" (Versus, Diwali Party) shows "Coming soon" for students until you set a real link. -->
  <section class="tiles" aria-label="Events">
 
-  <a class="tile h rise" style="--n:0" href="https://halloween.unrestdu.in" data-go>
+  <a class="tile h rise" style="--n:0" href="https://halloween.unrestdu.in" data-pick data-event="Trick or Treat">
    <div class="art" aria-hidden="true"><svg class="moon" viewBox="0 0 120 120"><path d="M78 12a50 50 0 1 0 30 76A42 42 0 0 1 78 12z" fill="#FF6A2A" opacity=".92"/></svg></div>
    <span class="chip">Live now</span>
    <div>
@@ -131,7 +148,7 @@ footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-a
    </div>
   </a>
 
-  <a class="tile f rise" style="--n:1" href="https://kmcumang.unrestdu.in" data-go>
+  <a class="tile f rise" style="--n:1" href="https://kmcumang.unrestdu.in" data-pick data-event="Freshers - Kirori Mal College">
    <div class="art" aria-hidden="true"><svg class="spin" viewBox="0 0 120 120" id="burst"></svg></div>
    <span class="chip">Live now</span>
    <div>
@@ -141,7 +158,7 @@ footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-a
    </div>
   </a>
 
-  <a class="tile v rise" style="--n:2" href="#" data-go>
+  <a class="tile v rise" style="--n:2" href="#" data-pick data-event="Versus">
    <div class="art" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#5EE0A0" stroke-width="1.5" opacity=".35"/><text x="60" y="78" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="56" fill="#5EE0A0" opacity=".9">VS</text></svg></div>
    <span class="chip">Coming up</span>
    <div>
@@ -151,7 +168,7 @@ footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-a
    </div>
   </a>
 
-  <a class="tile g rise" style="--n:3" href="#" data-go>
+  <a class="tile g rise" style="--n:3" href="#" data-pick data-event="Diwali Party">
    <div class="art" aria-hidden="true"><svg class="flame" viewBox="0 0 120 120"><path d="M60 14c10 16 18 24 8 40-3 5-8 5-8 5s-12-6-6-22c3-8 6-12 6-23z" fill="#FFC94A"/><path d="M14 66h92c0 20-20 36-46 36S14 86 14 66z" fill="#FF6A2A" opacity=".9"/></svg></div>
    <span class="chip">Coming up</span>
    <div>
@@ -161,32 +178,6 @@ footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-a
    </div>
   </a>
 
- </section>
-
- <section class="enq" id="enquiry" aria-labelledby="eh">
-  <h2 class="d" id="eh">Enquiry</h2>
-  <p class="sm">Questions about an event, entry or collaboration? Send it here and we will get back to you.</p>
-  <form id="enqform" novalidate>
-   <div class="row">
-    <label class="fld">Name<input name="name" type="text" autocomplete="name" required></label>
-    <label class="fld">Phone or WhatsApp<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required></label>
-   </div>
-   <div class="row">
-    <label class="fld">College<input name="college" type="text" placeholder="e.g. Kirori Mal College" required></label>
-    <label class="fld">Event<select name="event" required>
-     <option value="">Select an event</option>
-     <option>Trick or Treat</option>
-     <option>Freshers - Kirori Mal College</option>
-     <option>Versus</option>
-     <option>Diwali Party</option>
-     <option>Something else</option>
-    </select></label>
-   </div>
-   <label class="fld">Your question<textarea name="message" required></textarea></label>
-   <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-   <button class="dl send" type="submit">Send enquiry</button>
-   <p class="msg" id="enqmsg" role="status" aria-live="polite"></p>
-  </form>
  </section>
 
  <section class="past" aria-labelledby="ph">
@@ -204,6 +195,57 @@ footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-a
  </section>
 </div>
 <footer class="sm">Unrest. Made for Delhi University.</footer>
+
+<div class="pick" id="pick" role="dialog" aria-modal="true" aria-labelledby="pt" hidden>
+ <div class="panel">
+  <button class="x" type="button" id="pclose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg></button>
+
+  <div id="step1">
+   <p class="eyebrow">Who are you?</p>
+   <h2 class="d" id="pt"></h2>
+   <div class="choices">
+    <a class="choice" id="pstudent" href="#">
+     <span><span class="d">Student</span><small>Get the details and join the event.</small></span>
+     <span class="arr" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+    </a>
+    <button class="choice" type="button" id="psponsor">
+     <span><span class="d">Sponsor</span><small>Partner with us. Send an enquiry.</small></span>
+     <span class="arr" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+    </button>
+   </div>
+  </div>
+
+  <div id="step2" hidden>
+   <button class="back" type="button" id="pback">&larr; Back</button>
+   <p class="eyebrow">Sponsor enquiry</p>
+   <h2 class="d" id="sev"></h2>
+   <p class="sm">Tell us about your brand and what you have in mind. We will get back to you.</p>
+   <form id="enqform" novalidate>
+    <input type="hidden" name="event">
+    <div class="row">
+     <label class="fld">Brand or company<input name="brand" type="text" autocomplete="organization" required></label>
+     <label class="fld">Your name<input name="name" type="text" autocomplete="name" required></label>
+    </div>
+    <div class="row">
+     <label class="fld">Phone or WhatsApp<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required></label>
+     <label class="fld">Email<input name="email" type="email" autocomplete="email" required></label>
+    </div>
+    <label class="fld">Looking for<select name="need" required>
+     <option value="">Select one</option>
+     <option>Sponsorship</option>
+     <option>Stall or activation</option>
+     <option>Product sampling or giveaways</option>
+     <option>Promotion or media</option>
+     <option>Something else</option>
+    </select></label>
+    <label class="fld">Message<textarea name="message" required></textarea></label>
+    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+    <button class="dl send" type="submit">Send enquiry</button>
+    <p class="msg" id="enqmsg" role="status" aria-live="polite"></p>
+   </form>
+  </div>
+ </div>
+</div>
 
 <script>
 (function(){
@@ -228,29 +270,51 @@ if(!rm){
 document.querySelectorAll(".tile").forEach(function(t){
  t.addEventListener("pointermove",function(e){var r=t.getBoundingClientRect();t.style.setProperty("--mx",(e.clientX-r.left)+"px");t.style.setProperty("--my",(e.clientY-r.top)+"px")});
 });
-/* enquiry form: set ENQ_ENDPOINT to your Google Apps Script web app URL */
-var ENQ_ENDPOINT="";
-var f=$("#enqform"),m=$("#enqmsg");
+/* student / sponsor chooser */
+var ENQ_ENDPOINT=""; /* set to your Google Apps Script web app URL */
+var pick=$("#pick"),s1=$("#step1"),s2=$("#step2"),f=$("#enqform"),m=$("#enqmsg"),stu=$("#pstudent"),last=null,ev="";
+function go(url){document.documentElement.classList.add("leave");setTimeout(function(){location.href=url},rm?0:280)}
+function show(step){s1.hidden=step!==1;s2.hidden=step!==2}
+function openPick(tile){
+ last=tile;ev=tile.dataset.event;
+ var ac=getComputedStyle(tile).getPropertyValue("--ac").trim();
+ pick.style.setProperty("--ac",ac||"var(--pump)");
+ $("#pt").textContent=ev;$("#sev").textContent=ev;f.event.value=ev;
+ var url=tile.getAttribute("href"),soon=!url||url==="#";
+ stu.classList.toggle("soon",soon);
+ if(soon){stu.removeAttribute("href");stu.setAttribute("aria-disabled","true");stu.querySelector("small").textContent="Coming soon."}
+ else{stu.setAttribute("href",url);stu.removeAttribute("aria-disabled");stu.querySelector("small").textContent="Get the details and join the event."}
+ m.textContent="";m.className="msg";show(1);
+ pick.hidden=false;document.body.classList.add("lock");
+ (soon?$("#psponsor"):stu).focus();
+}
+function closePick(){pick.hidden=true;document.body.classList.remove("lock");if(last)last.focus()}
+document.querySelectorAll("[data-pick]").forEach(function(a){
+ a.addEventListener("click",function(e){if(e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;e.preventDefault();openPick(a)});
+});
+$("#pclose").addEventListener("click",closePick);
+pick.addEventListener("click",function(e){if(e.target===pick)closePick()});
+addEventListener("keydown",function(e){if(e.key==="Escape"&&!pick.hidden)closePick()});
+$("#psponsor").addEventListener("click",function(){show(2);f.brand.focus()});
+$("#pback").addEventListener("click",function(){show(1);$("#psponsor").focus()});
+stu.addEventListener("click",function(e){
+ var u=stu.getAttribute("href");if(!u)return;
+ if(e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;
+ e.preventDefault();go(u);
+});
 f.addEventListener("submit",function(e){
  e.preventDefault();m.className="msg";
  if(f.website.value)return;
  var v=function(n){return f[n].value.trim()};
- if(!v("name")||!v("phone")||!v("college")||!v("event")||!v("message")){m.className="msg err";m.textContent="Fill in every field.";return}
+ if(!v("brand")||!v("name")||!v("phone")||!v("email")||!v("need")||!v("message")){m.className="msg err";m.textContent="Fill in every field.";return}
  if(v("phone").replace(/\D/g,"").length<10){m.className="msg err";m.textContent="Enter a valid phone number.";return}
+ if(!/^\S+@\S+\.\S+$/.test(v("email"))){m.className="msg err";m.textContent="Enter a valid email.";return}
  if(!ENQ_ENDPOINT){m.className="msg err";m.textContent="Form is not connected yet.";return}
- var btn=f.querySelector("button");btn.disabled=true;m.textContent="Sending...";
- var body=new URLSearchParams({name:v("name"),phone:v("phone"),college:v("college"),event:v("event"),message:v("message"),time:new Date().toISOString()});
+ var btn=f.querySelector("button[type=submit]");btn.disabled=true;m.textContent="Sending...";
+ var body=new URLSearchParams({event:ev,brand:v("brand"),name:v("name"),phone:v("phone"),email:v("email"),need:v("need"),message:v("message"),time:new Date().toISOString()});
  fetch(ENQ_ENDPOINT,{method:"POST",mode:"no-cors",body:body}).then(function(){
   f.reset();btn.disabled=false;m.className="msg ok";m.textContent="Sent. We will get back to you soon.";
  }).catch(function(){btn.disabled=false;m.className="msg err";m.textContent="Could not send. Try again."});
-});
-/* fade out before opening an event page; skip tiles with no link yet */
-document.querySelectorAll("[data-go]").forEach(function(a){
- a.addEventListener("click",function(e){
-  if(a.getAttribute("href")==="#"){e.preventDefault();return}
-  if(e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;
-  e.preventDefault();document.documentElement.classList.add("leave");
-  setTimeout(function(){location.href=a.href},rm?0:280)});
 });
 addEventListener("pageshow",function(){document.documentElement.classList.remove("leave")});
 })();
