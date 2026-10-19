@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Unrest | Events</title>
-<meta name="description" content="Events by Unrest for Delhi University students. The Garba Corridor and Halloween House are live now.">
+<meta name="description" content="Events by Unrest for Delhi University students. Trick or Treat, Freshers at Kirori Mal College, Versus and the Diwali Party.">
 <meta name="theme-color" content="#0B0B0C">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -38,21 +38,27 @@ h1{font-size:clamp(3.6rem,14vw,10rem);line-height:.92;letter-spacing:.01em;margi
 .lede{margin-top:22px;max-width:30em;font-size:1.1rem;color:rgba(244,240,232,.75)}
 .rise{animation:rise .9s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--n,0)*130ms + .9s)}
 @keyframes rise{from{opacity:0;transform:translateY(22px)}}
-/* live tiles */
+/* event tiles */
 .tiles{display:grid;gap:16px;padding-bottom:clamp(56px,9vw,110px)}
 @media(min-width:820px){.tiles{grid-template-columns:1fr 1fr}}
 .tile{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:80px;min-height:440px;padding:28px;border:1px solid var(--char);border-radius:10px;overflow:hidden;isolation:isolate;transition:border-color .35s,transform .5s cubic-bezier(.22,1,.36,1)}
-@media(min-width:820px){.tile{min-height:540px}}
+@media(min-width:820px){.tile{min-height:500px}}
 .tile::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(420px circle at var(--mx,75%) var(--my,15%),var(--hi),transparent 70%);opacity:.55;transition:opacity .4s}
 .tile:hover{border-color:var(--ac);transform:translateY(-5px)}
 .tile:hover::before{opacity:1}
 .tile.g{--ac:var(--gold);--hi:rgba(255,201,74,.2);background:linear-gradient(160deg,#2e0f19,#140a0d 72%)}
 .tile.h{--ac:var(--pump);--hi:rgba(255,106,42,.22);background:linear-gradient(160deg,#18181b,#0c0c0d 72%)}
+.tile.f{--ac:#FF5C93;--hi:rgba(255,92,147,.2);background:linear-gradient(160deg,#2a0f1d,#120a0e 72%)}
+.tile.v{--ac:#5EE0A0;--hi:rgba(94,224,160,.18);background:linear-gradient(160deg,#0e2018,#0a110d 72%)}
 .art{position:absolute;z-index:-1;right:-36px;top:-36px;width:min(72%,320px);aspect-ratio:1}
-.ring{width:100%;height:100%;animation:spin 40s linear infinite}
+.art svg{width:100%;height:100%}
+.spin{animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.moon{width:100%;height:100%;animation:glowp 6s ease-in-out infinite}
+.moon,.flame{animation:glowp 6s ease-in-out infinite}
+.moon{filter:drop-shadow(0 0 0 rgba(255,106,42,0))}
 @keyframes glowp{50%{filter:drop-shadow(0 0 34px rgba(255,106,42,.55))}}
+.flame{animation-name:glowg}
+@keyframes glowg{50%{filter:drop-shadow(0 0 34px rgba(255,201,74,.6))}}
 .chip{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--ac);border-radius:99px;color:var(--ac);font-size:.8rem;font-weight:500}
 .chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ac);animation:pulse 2.2s ease-in-out infinite}
 .tile h2{font-size:clamp(2.4rem,5.4vw,3.8rem);line-height:.98;letter-spacing:.015em}
@@ -61,6 +67,21 @@ h1{font-size:clamp(3.6rem,14vw,10rem);line-height:.92;letter-spacing:.01em;margi
 .foot b{display:block;font-weight:600}
 .go{flex:none;display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--ac);border-radius:50%;color:var(--ac);transition:background .3s,color .3s,transform .4s cubic-bezier(.22,1,.36,1)}
 .tile:hover .go{background:var(--ac);color:var(--night);transform:translateX(4px)}
+/* enquiry */
+.enq{padding-bottom:clamp(56px,9vw,110px)}
+.enq h2{font-size:clamp(1.8rem,4.5vw,2.8rem);margin-bottom:6px}
+.enq form{display:grid;gap:16px;margin-top:28px;max-width:640px}
+.row{display:grid;gap:16px}
+@media(min-width:560px){.row{grid-template-columns:1fr 1fr}}
+.fld{display:grid;gap:6px;font-size:.85rem;font-weight:500;color:var(--ash)}
+.fld input,.fld select,.fld textarea{width:100%;font:400 1rem/1.4 Inter,system-ui,sans-serif;color:var(--ivory);background:rgba(244,240,232,.04);border:1px solid var(--char);border-radius:8px;padding:14px 16px;transition:border-color .3s,background .3s}
+.fld textarea{min-height:120px;resize:vertical}
+.fld select option{background:var(--night);color:var(--ivory)}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--pump);background:rgba(255,106,42,.06)}
+.send{justify-self:start;border:0;cursor:pointer;font-family:inherit}
+.send[disabled]{opacity:.5;cursor:default}
+.msg{min-height:1.4em;font-size:.9rem}
+.msg.ok{color:#5EE0A0}.msg.err{color:#FF7A7A}
 /* past */
 .past{padding-bottom:clamp(64px,10vw,120px)}
 .past h2{font-size:clamp(1.8rem,4.5vw,2.8rem);margin-bottom:24px}
@@ -77,7 +98,7 @@ h1{font-size:clamp(3.6rem,14vw,10rem);line-height:.92;letter-spacing:.01em;margi
 footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-area-inset-bottom,0px));text-align:center}
 .wipe{position:fixed;inset:0;z-index:80;background:var(--night);opacity:0;pointer-events:none;transition:opacity .28s}
 .leave .wipe{opacity:1}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.glow{display:none}html{scroll-behavior:auto}.ring{animation:spin 90s linear infinite!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.glow{display:none}html{scroll-behavior:auto}.spin{animation:spin 90s linear infinite!important}}
 </style>
 </head>
 <body>
@@ -91,23 +112,16 @@ footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-a
  </header>
 
  <section class="hero">
-  <p class="live rise" style="--n:-5">Two events live now</p>
-  <h1 class="d" id="h">Pick your night.</h1>
+  <p class="live rise" style="--n:-5">Four events on now</p>
+  <h1 class="d" id="h">Pick your event.</h1>
   <p class="lede rise" style="--n:-3">Events by Unrest for Delhi University students. Choose one and jump in.</p>
  </section>
 
- <!-- Event page links: change the href on each tile if a page moves. -->
- <section class="tiles" aria-label="Live events">
-  <a class="tile g rise" style="--n:0" href="https://dandiya.unrestdu.in" data-go>
-   <div class="art" aria-hidden="true"><svg class="ring" viewBox="0 0 120 120"></svg></div>
-   <span class="chip">Live now</span>
-   <div>
-    <h2 class="d">The Garba Corridor</h2>
-    <p class="t">Find a partner or a group for garba nights across DU. Sign up, then see your matches.</p>
-    <div class="foot"><div><b>Matches are live</b><span class="sm">Open only to DU students</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
-   </div>
-  </a>
-  <a class="tile h rise" style="--n:1" href="https://halloween.unrestdu.in" data-go>
+ <!-- Event page links: change the href on each tile if a page moves.
+      href="#" tiles (Versus, Diwali Party) are inert until you set a real link. -->
+ <section class="tiles" aria-label="Events">
+
+  <a class="tile h rise" style="--n:0" href="https://halloween.unrestdu.in" data-go>
    <div class="art" aria-hidden="true"><svg class="moon" viewBox="0 0 120 120"><path d="M78 12a50 50 0 1 0 30 76A42 42 0 0 1 78 12z" fill="#FF6A2A" opacity=".92"/></svg></div>
    <span class="chip">Live now</span>
    <div>
@@ -116,6 +130,63 @@ footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-a
     <div class="foot"><div><b>30 October, 1 PM to 10 PM</b><span class="sm" id="days">Invites by approval</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
    </div>
   </a>
+
+  <a class="tile f rise" style="--n:1" href="https://kmcumang.unrestdu.in" data-go>
+   <div class="art" aria-hidden="true"><svg class="spin" viewBox="0 0 120 120" id="burst"></svg></div>
+   <span class="chip">Live now</span>
+   <div>
+    <h2 class="d">Freshers - Kirori Mal College</h2>
+    <p class="t">The welcome party for the new batch at Kirori Mal College. Everything you need is on the Umang page.</p>
+    <div class="foot"><div><b>Open to KMC freshers</b><span class="sm">Details on the Umang page</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+   </div>
+  </a>
+
+  <a class="tile v rise" style="--n:2" href="#" data-go>
+   <div class="art" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#5EE0A0" stroke-width="1.5" opacity=".35"/><text x="60" y="78" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="56" fill="#5EE0A0" opacity=".9">VS</text></svg></div>
+   <span class="chip">Coming up</span>
+   <div>
+    <h2 class="d">Versus</h2>
+    <p class="t">1v1 Football Tournament. A unique format built for one-on-one showdowns. Bring your best footwork.</p>
+    <div class="foot"><div><b>1v1 Football Tournament</b><span class="sm">Unique format event</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+   </div>
+  </a>
+
+  <a class="tile g rise" style="--n:3" href="#" data-go>
+   <div class="art" aria-hidden="true"><svg class="flame" viewBox="0 0 120 120"><path d="M60 14c10 16 18 24 8 40-3 5-8 5-8 5s-12-6-6-22c3-8 6-12 6-23z" fill="#FFC94A"/><path d="M14 66h92c0 20-20 36-46 36S14 86 14 66z" fill="#FF6A2A" opacity=".9"/></svg></div>
+   <span class="chip">Coming up</span>
+   <div>
+    <h2 class="d">Diwali Party</h2>
+    <p class="t">Lights, music and everyone from DU in one place. The festival night, Unrest style.</p>
+    <div class="foot"><div><b>Diwali Party</b><span class="sm">Details soon</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+   </div>
+  </a>
+
+ </section>
+
+ <section class="enq" id="enquiry" aria-labelledby="eh">
+  <h2 class="d" id="eh">Enquiry</h2>
+  <p class="sm">Questions about an event, entry or collaboration? Send it here and we will get back to you.</p>
+  <form id="enqform" novalidate>
+   <div class="row">
+    <label class="fld">Name<input name="name" type="text" autocomplete="name" required></label>
+    <label class="fld">Phone or WhatsApp<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required></label>
+   </div>
+   <div class="row">
+    <label class="fld">College<input name="college" type="text" placeholder="e.g. Kirori Mal College" required></label>
+    <label class="fld">Event<select name="event" required>
+     <option value="">Select an event</option>
+     <option>Trick or Treat</option>
+     <option>Freshers - Kirori Mal College</option>
+     <option>Versus</option>
+     <option>Diwali Party</option>
+     <option>Something else</option>
+    </select></label>
+   </div>
+   <label class="fld">Your question<textarea name="message" required></textarea></label>
+   <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+   <button class="dl send" type="submit">Send enquiry</button>
+   <p class="msg" id="enqmsg" role="status" aria-live="polite"></p>
+  </form>
  </section>
 
  <section class="past" aria-labelledby="ph">
@@ -140,14 +211,13 @@ var $=function(s){return document.querySelector(s)},rm=matchMedia("(prefers-redu
 /* headline reveals word by word */
 var h=$("#h");
 h.innerHTML=h.textContent.trim().split(/\s+/).map(function(w,i){return '<span class="w"><span style="--i:'+i+'">'+w+'</span></span>'}).join(" ");
-/* garba ring: a circle of dandiya dots */
-var r=$(".ring"),s="";
-for(var i=0;i<12;i++){var a=i/12*Math.PI*2;s+='<circle cx="'+(60+44*Math.cos(a)).toFixed(1)+'" cy="'+(60+44*Math.sin(a)).toFixed(1)+'" r="'+(i%3?3:5)+'" fill="#FFC94A" opacity="'+(i%3?.55:.95)+'"/>'}
-for(var j=0;j<6;j++){var b=j/6*Math.PI*2+.26;s+='<circle cx="'+(60+26*Math.cos(b)).toFixed(1)+'" cy="'+(60+26*Math.sin(b)).toFixed(1)+'" r="2" fill="#FFC94A" opacity=".4"/>'}
-r.innerHTML=s;
+/* freshers burst: a ring of spokes */
+var b=$("#burst"),s="";
+for(var i=0;i<16;i++){var a=i/16*Math.PI*2,l=i%2?34:46;s+='<line x1="'+(60+22*Math.cos(a)).toFixed(1)+'" y1="'+(60+22*Math.sin(a)).toFixed(1)+'" x2="'+(60+l*Math.cos(a)).toFixed(1)+'" y2="'+(60+l*Math.sin(a)).toFixed(1)+'" stroke="#FF5C93" stroke-width="3" stroke-linecap="round" opacity="'+(i%2?.5:.95)+'"/>'}
+b.innerHTML=s;
 /* days to go for halloween */
 var d=Math.ceil((new Date("2026-10-30T13:00:00+05:30")-Date.now())/864e5);
-$("#days").textContent=d>1?d+" days to go":d===1?"Tomorrow":"Today";
+$("#days").textContent=d>1?d+" days to go":d===1?"Tomorrow":d===0?"Today":"Invites by approval";
 if(!rm){
  /* soft light that follows the pointer */
  var g=$("#glow"),x=innerWidth/2,y=innerHeight/3,tx=x,ty=y;
@@ -156,11 +226,28 @@ if(!rm){
 }
 /* tile light follows the pointer inside each tile */
 document.querySelectorAll(".tile").forEach(function(t){
- t.addEventListener("pointermove",function(e){var b=t.getBoundingClientRect();t.style.setProperty("--mx",(e.clientX-b.left)+"px");t.style.setProperty("--my",(e.clientY-b.top)+"px")});
+ t.addEventListener("pointermove",function(e){var r=t.getBoundingClientRect();t.style.setProperty("--mx",(e.clientX-r.left)+"px");t.style.setProperty("--my",(e.clientY-r.top)+"px")});
 });
-/* fade out before opening an event page */
+/* enquiry form: set ENQ_ENDPOINT to your Google Apps Script web app URL */
+var ENQ_ENDPOINT="";
+var f=$("#enqform"),m=$("#enqmsg");
+f.addEventListener("submit",function(e){
+ e.preventDefault();m.className="msg";
+ if(f.website.value)return;
+ var v=function(n){return f[n].value.trim()};
+ if(!v("name")||!v("phone")||!v("college")||!v("event")||!v("message")){m.className="msg err";m.textContent="Fill in every field.";return}
+ if(v("phone").replace(/\D/g,"").length<10){m.className="msg err";m.textContent="Enter a valid phone number.";return}
+ if(!ENQ_ENDPOINT){m.className="msg err";m.textContent="Form is not connected yet.";return}
+ var btn=f.querySelector("button");btn.disabled=true;m.textContent="Sending...";
+ var body=new URLSearchParams({name:v("name"),phone:v("phone"),college:v("college"),event:v("event"),message:v("message"),time:new Date().toISOString()});
+ fetch(ENQ_ENDPOINT,{method:"POST",mode:"no-cors",body:body}).then(function(){
+  f.reset();btn.disabled=false;m.className="msg ok";m.textContent="Sent. We will get back to you soon.";
+ }).catch(function(){btn.disabled=false;m.className="msg err";m.textContent="Could not send. Try again."});
+});
+/* fade out before opening an event page; skip tiles with no link yet */
 document.querySelectorAll("[data-go]").forEach(function(a){
  a.addEventListener("click",function(e){
+  if(a.getAttribute("href")==="#"){e.preventDefault();return}
   if(e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;
   e.preventDefault();document.documentElement.classList.add("leave");
   setTimeout(function(){location.href=a.href},rm?0:280)});
