@@ -272,7 +272,7 @@ document.querySelectorAll(".tile").forEach(function(t){
  t.addEventListener("pointermove",function(e){var r=t.getBoundingClientRect();t.style.setProperty("--mx",(e.clientX-r.left)+"px");t.style.setProperty("--my",(e.clientY-r.top)+"px")});
 });
 /* student / sponsor chooser */
-var ENQ_ENDPOINT=""; /* set to your Google Apps Script web app URL */
+var ENQ_ENDPOINT="https://script.google.com/macros/s/AKfycbxcoo3VIl-LVm_-d6PyPhHlbnetVh2-Y6vmrVNIeI0Y998fR8_jWNk3s1wIQ68-O_4jyg/exec"; /* Apps Script web app */
 var pick=$("#pick"),s1=$("#step1"),s2=$("#step2"),f=$("#enqform"),m=$("#enqmsg"),stu=$("#pstudent"),last=null,ev="";
 function go(url){document.documentElement.classList.add("leave");setTimeout(function(){location.href=url},rm?0:280)}
 function show(step){s1.hidden=step!==1;s2.hidden=step!==2}
