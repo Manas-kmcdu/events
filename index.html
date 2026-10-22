@@ -41,8 +41,12 @@ h1{font-size:clamp(3.6rem,14vw,10rem);line-height:.92;letter-spacing:.01em;margi
 /* event tiles */
 .tiles{display:grid;gap:16px;padding-bottom:clamp(56px,9vw,110px)}
 @media(min-width:820px){.tiles{grid-template-columns:1fr 1fr}}
-.tile{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:80px;min-height:440px;padding:28px;border:1px solid var(--char);border-radius:10px;overflow:hidden;isolation:isolate;transition:border-color .35s,transform .5s cubic-bezier(.22,1,.36,1)}
-@media(min-width:820px){.tile{min-height:500px}}
+.tile{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:80px;min-height:480px;padding:28px;border:1px solid var(--char);border-radius:10px;overflow:hidden;isolation:isolate;transition:border-color .35s,transform .5s cubic-bezier(.22,1,.36,1)}
+@media(min-width:820px){.tile{min-height:540px}}
+/* photo background: set background-image inline on .bg. No image = gradient only */
+.bg{position:absolute;inset:0;z-index:-3;background-size:cover;background-position:center;transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,.35) 0%,rgba(11,11,12,.55) 45%,rgba(11,11,12,.92) 100%)}
+.tile:hover .bg{transform:scale(1.05)}
 .tile::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(420px circle at var(--mx,75%) var(--my,15%),var(--hi),transparent 70%);opacity:.55;transition:opacity .4s}
 .tile:hover{border-color:var(--ac);transform:translateY(-5px)}
 .tile:hover::before{opacity:1}
@@ -59,11 +63,17 @@ h1{font-size:clamp(3.6rem,14vw,10rem);line-height:.92;letter-spacing:.01em;margi
 @keyframes glowp{50%{filter:drop-shadow(0 0 34px rgba(255,106,42,.55))}}
 .flame{animation-name:glowg}
 @keyframes glowg{50%{filter:drop-shadow(0 0 34px rgba(255,201,74,.6))}}
-.chip{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--ac);border-radius:99px;color:var(--ac);font-size:.8rem;font-weight:500}
+.chip{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--ac);border-radius:99px;color:var(--ac);font-size:.8rem;font-weight:500;background:rgba(11,11,12,.45)}
 .chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ac);animation:pulse 2.2s ease-in-out infinite}
 .tile h2{font-size:clamp(2.4rem,5.4vw,3.8rem);line-height:.98;letter-spacing:.015em}
-.tile p.t{margin-top:14px;max-width:24em;color:rgba(244,240,232,.75)}
-.foot{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid rgba(244,240,232,.14)}
+.tile p.t{margin-top:14px;max-width:24em;color:rgba(244,240,232,.8)}
+/* footfall + starting price */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:24px;border:1px solid rgba(244,240,232,.14);border-radius:8px;overflow:hidden;background:rgba(244,240,232,.14)}
+.stat{padding:14px 16px;background:rgba(11,11,12,.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.stat .k{display:block;font-size:.72rem;font-weight:500;letter-spacing:.04em;color:var(--ash)}
+.stat .v{display:block;margin-top:4px;font-size:1.7rem;line-height:1;letter-spacing:.02em;color:var(--ac)}
+.stat .v small{font-family:Inter,sans-serif;font-size:.75rem;color:var(--ash);letter-spacing:0;margin-left:2px}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-top:20px;padding-top:20px;border-top:1px solid rgba(244,240,232,.14)}
 .foot b{display:block;font-weight:600}
 .go{flex:none;display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--ac);border-radius:50%;color:var(--ac);transition:background .3s,color .3s,transform .4s cubic-bezier(.22,1,.36,1)}
 .tile:hover .go{background:var(--ac);color:var(--night);transform:translateX(4px)}
@@ -112,7 +122,18 @@ body.lock{overflow:hidden}
 .getapp h2{font-size:clamp(1.8rem,4.5vw,2.8rem);margin-bottom:6px}
 .dl{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 30px;border-radius:99px;background:var(--pump);color:var(--night);font-weight:600;font-size:.9rem;transition:box-shadow .3s,transform .3s}
 .dl:hover{transform:translateY(-2px);box-shadow:0 0 44px -8px var(--pump)}
-footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-area-inset-bottom,0px));text-align:center}
+/* what is unrest footer */
+footer{border-top:1px solid var(--char);padding:clamp(40px,7vw,72px) 0 calc(28px + env(safe-area-inset-bottom,0px))}
+.about{display:grid;gap:32px;padding-bottom:clamp(32px,5vw,56px)}
+@media(min-width:820px){.about{grid-template-columns:1.2fr 1fr;gap:64px}}
+.about h2{font-size:clamp(2rem,5vw,3.2rem);line-height:1;margin:10px 0 16px}
+.about p{max-width:34em;color:rgba(244,240,232,.75)}
+.about .eyebrow{color:var(--pump)}
+.facts{list-style:none;padding:0;border-top:1px solid var(--char);align-self:start}
+.facts li{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--char);font-size:.95rem}
+.facts li span:first-child{color:var(--ash)}
+.facts li span:last-child{font-weight:500;text-align:right}
+.copy{padding-top:24px;border-top:1px solid var(--char);text-align:center}
 .wipe{position:fixed;inset:0;z-index:80;background:var(--night);opacity:0;pointer-events:none;transition:opacity .28s}
 .leave .wipe{opacity:1}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.glow{display:none}html{scroll-behavior:auto}.spin{animation:spin 90s linear infinite!important}}
@@ -135,45 +156,66 @@ footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-a
  </section>
 
  <!-- Each tile opens a Student / Sponsor chooser. The tile href is the student page.
-      href="#" (Versus, Diwali Party) shows "Coming soon" for students until you set a real link. -->
+      href="#" (Versus, Diwali Party) shows "Coming soon" for students until you set a real link.
+      PHOTOS: set the .bg style on each tile, e.g. style="background-image:url('img/freshers.png')". -->
  <section class="tiles" aria-label="Events">
 
   <a class="tile h rise" style="--n:0" href="https://halloween.unrestdu.in" data-pick data-event="Trick or Treat">
+   <div class="bg" style="background-image:url('img/trick-or-treat.jpg')" aria-hidden="true"></div>
    <div class="art" aria-hidden="true"><svg class="moon" viewBox="0 0 120 120"><path d="M78 12a50 50 0 1 0 30 76A42 42 0 0 1 78 12z" fill="#FF6A2A" opacity=".92"/></svg></div>
    <span class="chip">Live now</span>
    <div>
     <h2 class="d">Trick or Treat</h2>
     <p class="t">Halloween House. Request your invite, get approved, and walk in if you dare.</p>
+    <div class="stats">
+     <div class="stat"><span class="k">FOOTFALL</span><span class="v d">~100</span></div>
+     <div class="stat"><span class="k">SPONSORSHIP FROM</span><span class="v d">₹3,500</span></div>
+    </div>
     <div class="foot"><div><b>30 October, 1 PM to 10 PM</b><span class="sm" id="days">Invites by approval</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
    </div>
   </a>
 
   <a class="tile f rise" style="--n:1" href="https://kmcumang.unrestdu.in" data-pick data-event="Freshers - Kirori Mal College">
+   <div class="bg" style="background-image:url('img/freshers.png')" aria-hidden="true"></div>
    <div class="art" aria-hidden="true"><svg class="spin" viewBox="0 0 120 120" id="burst"></svg></div>
    <span class="chip">Live now</span>
    <div>
     <h2 class="d">Freshers - Kirori Mal College</h2>
     <p class="t">The welcome party for the new batch at Kirori Mal College. Everything you need is on the Umang page.</p>
+    <div class="stats">
+     <div class="stat"><span class="k">FOOTFALL</span><span class="v d">3,500</span></div>
+     <div class="stat"><span class="k">SPONSORSHIP FROM</span><span class="v d">₹15,000</span></div>
+    </div>
     <div class="foot"><div><b>Open to KMC freshers</b><span class="sm">Details on the Umang page</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
    </div>
   </a>
 
   <a class="tile v rise" style="--n:2" href="#" data-pick data-event="Versus">
+   <div class="bg" style="background-image:url('img/versus.jpg')" aria-hidden="true"></div>
    <div class="art" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#5EE0A0" stroke-width="1.5" opacity=".35"/><text x="60" y="78" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="56" fill="#5EE0A0" opacity=".9">VS</text></svg></div>
    <span class="chip">Coming up</span>
    <div>
     <h2 class="d">Versus</h2>
     <p class="t">1v1 Football Tournament. A unique format built for one-on-one showdowns. Bring your best footwork.</p>
+    <div class="stats">
+     <div class="stat"><span class="k">FOOTFALL</span><span class="v d">~200</span></div>
+     <div class="stat"><span class="k">SPONSORSHIP FROM</span><span class="v d">₹5,500</span></div>
+    </div>
     <div class="foot"><div><b>1v1 Football Tournament</b><span class="sm">Unique format event</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
    </div>
   </a>
 
   <a class="tile g rise" style="--n:3" href="#" data-pick data-event="Diwali Party">
+   <div class="bg" style="background-image:url('img/diwali-party.jpg')" aria-hidden="true"></div>
    <div class="art" aria-hidden="true"><svg class="flame" viewBox="0 0 120 120"><path d="M60 14c10 16 18 24 8 40-3 5-8 5-8 5s-12-6-6-22c3-8 6-12 6-23z" fill="#FFC94A"/><path d="M14 66h92c0 20-20 36-46 36S14 86 14 66z" fill="#FF6A2A" opacity=".9"/></svg></div>
    <span class="chip">Coming up</span>
    <div>
     <h2 class="d">Diwali Party</h2>
     <p class="t">Lights, music and everyone from DU in one place. The festival night, Unrest style.</p>
+    <div class="stats">
+     <div class="stat"><span class="k">FOOTFALL</span><span class="v d">~200</span></div>
+     <div class="stat"><span class="k">SPONSORSHIP FROM</span><span class="v d">₹5,500</span></div>
+    </div>
     <div class="foot"><div><b>Diwali Party</b><span class="sm">Details soon</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
    </div>
   </a>
@@ -195,7 +237,26 @@ footer{border-top:1px solid var(--char);padding:28px 20px calc(28px + env(safe-a
   <a class="dl" href="https://unrestdu.in/get" target="_blank" rel="noopener">Download the app</a>
  </section>
 </div>
-<footer class="sm">Unrest. Made for Delhi University.</footer>
+
+<footer>
+ <div class="wrap">
+  <div class="about">
+   <div>
+    <p class="eyebrow">What is Unrest</p>
+    <h2 class="d">The verified campus network for DU.</h2>
+    <p>Unrest is a social platform built only for Delhi University students. Every member is verified, so the people you meet are real students from your campus. We run events, bring colleges together and connect brands directly with the students they want to reach.</p>
+   </div>
+   <ul class="facts">
+    <li><span>Built for</span><span>Delhi University students</span></li>
+    <li><span>Members</span><span>Verified students only</span></li>
+    <li><span>What we do</span><span>Events, community, campus network</span></li>
+    <li><span>For brands</span><span>Sponsorships, stalls, activations</span></li>
+    <li><span>Get it</span><span><a href="https://unrestdu.in/get" target="_blank" rel="noopener">unrestdu.in/get</a></span></li>
+   </ul>
+  </div>
+  <p class="sm copy">Unrest. Made for Delhi University.</p>
+ </div>
+</footer>
 
 <div class="pick" id="pick" role="dialog" aria-modal="true" aria-labelledby="pt" hidden>
  <div class="panel">
