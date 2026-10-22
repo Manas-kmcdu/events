@@ -37,7 +37,7 @@ a{color:inherit;text-decoration:none}
 .app:hover{color:var(--pump);border-color:var(--pump)}
 /* hero: the one orchestrated moment */
 .hero{padding-block:clamp(48px,10vw,120px) clamp(36px,6vw,64px)}
-h1{font-size:clamp(3.6rem,14vw,10rem);line-height:.92;letter-spacing:.01em;margin-top:22px}
+h1{font-size:clamp(2.8rem,8.6vw,6.6rem);line-height:.96;letter-spacing:.01em;margin-top:22px}
 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}
 .w>span{display:inline-block;animation:up 1.1s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i)*120ms + .15s)}
 @keyframes up{from{transform:translateY(112%)}}
@@ -48,6 +48,7 @@ h1{font-size:clamp(3.6rem,14vw,10rem);line-height:.92;letter-spacing:.01em;margi
 .rise{animation:rise .9s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--n,0)*130ms + .9s)}
 @keyframes rise{from{opacity:0;transform:translateY(22px)}}
 /* event tiles */
+.sec{font-size:clamp(1.8rem,4.5vw,2.8rem);margin-bottom:24px}
 .tiles{display:grid;gap:16px;padding-bottom:clamp(56px,9vw,110px)}
 @media(min-width:820px){.tiles{grid-template-columns:1fr 1fr}}
 .tile{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:80px;min-height:480px;padding:28px;border:1px solid var(--char);border-radius:10px;overflow:hidden;isolation:isolate;transition:border-color .35s,transform .5s cubic-bezier(.22,1,.36,1)}
@@ -139,6 +140,14 @@ body.lock{overflow:hidden}
 .getapp h2{font-size:clamp(1.8rem,4.5vw,2.8rem);margin-bottom:6px}
 .dl{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 30px;border-radius:99px;background:var(--pump);color:var(--night);font-weight:600;font-size:.9rem;transition:box-shadow .3s,transform .3s}
 .dl:hover{transform:translateY(-2px);box-shadow:0 0 44px -8px var(--pump)}
+/* get in touch */
+.contact{scroll-margin-top:24px;margin-bottom:clamp(56px,9vw,110px);padding:clamp(24px,5vw,44px);border:1px solid var(--char);border-radius:10px}
+.contact h2{font-size:clamp(2.2rem,6vw,4rem);line-height:1;margin:10px 0 8px}
+.contact>p.sm{max-width:34em;font-size:.95rem}
+.contact form{display:grid;gap:16px;margin-top:26px}
+.contact .row3{display:grid;gap:16px}
+@media(min-width:720px){.contact .row3{grid-template-columns:1fr 1fr 1fr}}
+.contact .eyebrow{color:var(--ash)}
 /* what is unrest footer */
 footer{border-top:1px solid var(--char);padding:clamp(40px,7vw,72px) 0 calc(28px + env(safe-area-inset-bottom,0px))}
 .about{display:grid;gap:32px;padding-bottom:clamp(32px,5vw,56px)}
@@ -168,13 +177,16 @@ footer{border-top:1px solid var(--char);padding:clamp(40px,7vw,72px) 0 calc(28px
 
  <section class="hero">
   <p class="live rise" style="--n:-5">Four events on now</p>
-  <h1 class="d" id="h">Pick your event.</h1>
-  <p class="lede rise" style="--n:-3">Events by Unrest for Delhi University students. Choose one and jump in.</p>
+  <h1 class="d" id="h">Put your brand in front of Gen Z.</h1>
+  <p class="lede rise" style="--n:-3">Events by Unrest for Delhi University students. Sponsor one, or just say hello.</p>
+  <a class="dl rise" style="--n:-2;margin-top:28px" href="#contact">Get in touch</a>
  </section>
 
  <!-- Each tile opens a Student / Sponsor chooser. The tile href is the student page.
       href="#" (Versus, Diwali Party) shows "Coming soon" for students until you set a real link.
       PHOTOS: set the .bg style on each tile, e.g. style="background-image:url('img/photo.jpg')". -->
+
+ <h2 class="d sec" id="ev">Pick your event</h2>
  <section class="tiles" aria-label="Events">
 
   <a class="tile h rise" style="--n:0" href="https://halloween.unrestdu.in" data-pick data-event="Trick or Treat">
@@ -186,7 +198,7 @@ footer{border-top:1px solid var(--char);padding:clamp(40px,7vw,72px) 0 calc(28px
     </div></div>
    <div>
     <h2 class="d">Trick or Treat</h2>
-    <p class="t">Halloween House. Request your invite, get approved, and walk in if you dare.</p>
+    <p class="t">Halloween Houseparty.</p>
     <div class="foot"><div><b>30 October, 1 PM to 10 PM</b><span class="sm" id="days">Invites by approval</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
    </div>
   </a>
@@ -200,7 +212,7 @@ footer{border-top:1px solid var(--char);padding:clamp(40px,7vw,72px) 0 calc(28px
     </div></div>
    <div>
     <h2 class="d">Freshers - Kirori Mal College</h2>
-    <p class="t">The welcome party for the new batch at Kirori Mal College. Everything you need is on the Umang page.</p>
+    <p class="t">A grand welcome for the new batch at Kirori Mal College.</p>
     <div class="foot"><div><b>Open to KMC freshers</b><span class="sm">Details on the Umang page</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
    </div>
   </a>
@@ -214,7 +226,7 @@ footer{border-top:1px solid var(--char);padding:clamp(40px,7vw,72px) 0 calc(28px
     </div></div>
    <div>
     <h2 class="d">Versus</h2>
-    <p class="t">1v1 Football Tournament. A unique format built for one-on-one showdowns. Bring your best footwork.</p>
+    <p class="t">1v1 Football Tournament. A unique format built for one-on-one showdowns.</p>
     <div class="foot"><div><b>1v1 Football Tournament</b><span class="sm">Unique format event</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
    </div>
   </a>
@@ -228,7 +240,7 @@ footer{border-top:1px solid var(--char);padding:clamp(40px,7vw,72px) 0 calc(28px
     </div></div>
    <div>
     <h2 class="d">Diwali Party</h2>
-    <p class="t">Lights, music and everyone from DU in one place. The festival night, Unrest style.</p>
+    <p class="t">Lights, music and everyone from DU in one place.</p>
     <div class="foot"><div><b>Diwali Party</b><span class="sm">Details soon</span></div><span class="go" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
    </div>
   </a>
@@ -243,6 +255,23 @@ footer{border-top:1px solid var(--char);padding:clamp(40px,7vw,72px) 0 calc(28px
    <li><span class="sm">6 Sep 2026</span><span class="d n">Run Club</span><span class="sm">Done</span></li>
    <li><span class="sm">23 Aug 2026</span><span class="d n">UNRSTRCTD'26</span><span class="sm">Done</span></li>
   </ul>
+ </section>
+
+
+ <section class="contact" id="contact" aria-labelledby="ct">
+  <p class="eyebrow">For brands and sponsors</p>
+  <h2 class="d" id="ct">Get in touch with us</h2>
+  <p class="sm">Share your details and we will call you back with sponsorship options for upcoming events.</p>
+  <form id="contactform" novalidate>
+   <div class="row3">
+    <label class="fld">Your name<input name="name" type="text" autocomplete="name" required></label>
+    <label class="fld">Brand<input name="brand" type="text" autocomplete="organization" required></label>
+    <label class="fld">Contact number<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required></label>
+   </div>
+   <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+   <button class="dl send" type="submit">Get in touch</button>
+   <p class="msg" id="cmsg" role="status" aria-live="polite"></p>
+  </form>
  </section>
 
  <section class="getapp" aria-label="Get the app">
@@ -390,6 +419,19 @@ f.addEventListener("submit",function(e){
  fetch(ENQ_ENDPOINT,{method:"POST",mode:"no-cors",body:body}).then(function(){
   f.reset();btn.disabled=false;m.className="msg ok";m.textContent="Sent. We will get back to you soon.";
  }).catch(function(){btn.disabled=false;m.className="msg err";m.textContent="Could not send. Try again."});
+});
+var cf=$("#contactform"),cm=$("#cmsg");
+cf.addEventListener("submit",function(e){
+ e.preventDefault();cm.className="msg";
+ if(cf.website.value)return;
+ var v=function(n){return cf[n].value.trim()};
+ if(!v("name")||!v("brand")||!v("phone")){cm.className="msg err";cm.textContent="Fill in every field.";return}
+ if(v("phone").replace(/\D/g,"").length<10){cm.className="msg err";cm.textContent="Enter a valid phone number.";return}
+ var btn=cf.querySelector("button[type=submit]");btn.disabled=true;cm.textContent="Sending...";
+ var body=new URLSearchParams({event:"General enquiry (contact section)",brand:v("brand"),name:v("name"),phone:v("phone"),email:"",need:"",message:"",time:new Date().toISOString()});
+ fetch(ENQ_ENDPOINT,{method:"POST",mode:"no-cors",body:body}).then(function(){
+  cf.reset();btn.disabled=false;cm.className="msg ok";cm.textContent="Sent. We will call you back soon.";
+ }).catch(function(){btn.disabled=false;cm.className="msg err";cm.textContent="Could not send. Try again."});
 });
 addEventListener("pageshow",function(){document.documentElement.classList.remove("leave")});
 })();
